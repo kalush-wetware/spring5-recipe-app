@@ -29,13 +29,13 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
-    
+
     @Lob
     private String directions;
 
     @Lob
     private Byte[] image;
-   
+
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
@@ -43,7 +43,7 @@ public class Recipe {
     private Notes notes;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients  = new HashSet<>();
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "recipe_category",
@@ -137,6 +137,7 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+        notes.setRecipe(this);
     }
 
     public Set<Ingredient> getIngredients() {
